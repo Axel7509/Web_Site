@@ -1,11 +1,11 @@
 import json
 import datetime
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
 
 
-# Create your views here.
+from .forms import SignupForm
 
 
 def store(request):
@@ -16,12 +16,15 @@ def store(request):
         cartItems = order.get_cart_items
     else:
         # Create empty cart for now for non-logged in user
+        customer = Customer()
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
     products = Product.objects.all()
-    context = {'products': products, 'cartItems': cartItems}
+    context = {'products': products,
+               'cartItems': cartItems,
+               'customer': customer}
     return render(request, 'store/store.html', context)
 
 
@@ -34,11 +37,15 @@ def cart(request):
 
     else:
         # Create empty cart for now for non-logged in user
+        customer = Customer()
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer}
     return render(request, 'store/cart.html', context)
 
 
@@ -50,11 +57,15 @@ def checkout(request):
         cartItems = order.get_cart_items
     else:
         # Create empty cart for now for non-logged in user
+        customer = Customer()
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer}
     return render(request, 'store/checkout.html', context)
 
 
@@ -111,3 +122,28 @@ def processOrder(request):
         print('User is not logged in')
 
     return JsonResponse('Payment complete!', safe=False)
+
+
+def signup(request):
+    form = SignupForm()
+    if request.method == 'POST':
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = get_user(request)
+            Customer.objects.create(
+                user=user,
+                name="as",
+                email="sdsdsds"
+            )
+            return redirect('/login/')
+    else:
+        form = SignupForm()
+
+    context = {'form': form}
+    return render(request, 'store/signup.html', context,)
+
+
+def get_user(request):
+    user = request.user
+    return user
