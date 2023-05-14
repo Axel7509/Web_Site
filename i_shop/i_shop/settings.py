@@ -36,12 +36,14 @@ LOGIN_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 
     'store.apps.StoreConfig'
 ]
@@ -136,3 +138,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_header": "Library",
+    "site_brand": "Admin Panel",
+    "welcome_sign": "Welcome to the Admin Panel",
+}
