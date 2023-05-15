@@ -10,7 +10,20 @@ from .forms import SignupForm
 
 def store(request):
     if request.user.is_authenticated:
-        customer = request.user.customer
+        user = User.objects.get(
+            username=request.user
+        )
+
+        try:
+            customer = user.customer
+
+        except AttributeError:
+            customer = Customer.objects.create(
+                user=request.user,
+                name=user.username,
+                email=user.email
+            )
+
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
@@ -131,11 +144,6 @@ def signup(request):
         if form.is_valid():
             form.save()
             user = get_user(request)
-            Customer.objects.create(
-                user=user,
-                name="as",
-                email="sdsdsds"
-            )
             return redirect('/login/')
     else:
         form = SignupForm()
@@ -146,4 +154,5 @@ def signup(request):
 
 def get_user(request):
     user = request.user
+    print(user)
     return user
