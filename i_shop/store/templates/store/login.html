@@ -1,9 +1,14 @@
-{% extends 'store/main.html' %}
+{% extends 'store/base.html' %}
 {% load static %}
 
 {% block content %}
-
+{% for c in words %}
+         <div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
+{% endfor %}
 <div class="w-1/2 my-6 mx-auto p-6 bg-gray-100 rounded-xl">
+
     <h1 class="mb-6 text-3xl">Log in</h1>
     <script src="https://cdn.tailwindcss.com"></script>
     <form method="post" action=".">

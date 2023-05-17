@@ -1,4 +1,4 @@
-{% extends 'store/main.html' %}
+{% extends 'store/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -44,10 +44,23 @@
 							<img data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart" src="{% static  'images/arrow-down.png' %}">
 						</div>
 					</div>
-					<div style="flex:1"><p>${{item.get_total}}</p></div>
+					<div style="flex:1"><p>${{item.get_total|floatformat:2}}</p></div>
 				</div>
 				{% endfor %}
 			</div>
 		</div>
 	</div>
+
+	<div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
+     <div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
+     <div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
+     <div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
 {% endblock content %}

@@ -29,15 +29,22 @@ def store(request):
         cartItems = order.get_cart_items
     else:
         # Create empty cart for now for non-logged in user
-        customer = Customer()
+        customer = Customer(
+            name=''
+        )
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
 
+    #products = Product.objects.filter(is_sold=False)
     products = Product.objects.all()
+    categories = Category.objects.all()
     context = {'products': products,
                'cartItems': cartItems,
-               'customer': customer}
+               'customer': customer,
+               'categories': categories}
+
+    #change to store/store.html after
     return render(request, 'store/store.html', context)
 
 
@@ -131,6 +138,14 @@ def processOrder(request):
                 state=data['shipping']['state'],
                 zipcode=data['shipping']['zipcode'],
             )
+        else:
+            ShippingAddress.objects.create(
+                customer=customer,
+                order=order,
+                address=data['shipping']['address'],
+                city=data['shipping']['city'],
+                state=data['shipping']['state'],
+            )
     else:
         print('User is not logged in')
 
@@ -143,7 +158,7 @@ def signup(request):
         form = SignupForm(request.POST)
         if form.is_valid():
             form.save()
-            user = get_user(request)
+
             return redirect('/login/')
     else:
         form = SignupForm()
@@ -152,7 +167,26 @@ def signup(request):
     return render(request, 'store/signup.html', context,)
 
 
-def get_user(request):
-    user = request.user
-    print(user)
-    return user
+def leave_user(request):
+    request.user.is_authenticated = False
+    return store(request)
+
+
+def contact(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer()
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer}
+    return render(request, 'store/contact.html', context)

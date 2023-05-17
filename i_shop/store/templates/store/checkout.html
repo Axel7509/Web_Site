@@ -1,4 +1,4 @@
-{% extends 'store/main.html' %}
+{% extends 'store/base.html' %}
 {% load static %}
 {% block content %}
      <div class="row">
@@ -19,32 +19,33 @@
 						<p>Shipping Information:</p>
 						<hr>
 						<div class="form-field">
-							<input class="form-control" type="text" name="address" placeholder="Address..">
+							<input required class="form-control" type="text" name="address" placeholder="Address..">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="city" placeholder="City..">
+							<input required class="form-control" type="text" name="city" placeholder="City..">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="state" placeholder="State..">
+							<input required class="form-control" type="text" name="state" placeholder="State..">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+							<input required class="form-control" type="text" name="zipcode" placeholder="Zip code..">
 						</div>
-						<div class="form-field">
-							<input class="form-control" type="text" name="country" placeholder="Zip code..">
-						</div>
+
 					</div>
 
 					<hr>
 					<input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
 				</form>
 			</div>
+			{% if order.get_cart_total %}
 
-			<br>
+                <br>
 			<div class="box-element hidden" id="payment-info">
 				<small>Paypal Options</small>
 				<button id="make-payment">Make payment</button>
 			</div>
+
+			{% endif %}
 
 		</div>
 
@@ -67,6 +68,19 @@
 			</div>
 		</div>
 	</div>
+
+	<div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
+	<div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
+	<div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
+	<div class = "title text-center">
+                <h1 class = "position-relative d-inline-block"></h1>
+         </div>
 
 	<script type="text/javascript">
 		var shipping = '{{order.shipping}}'
@@ -121,6 +135,10 @@
 		    	shippingInfo.city = form.city.value
 		    	shippingInfo.state = form.state.value
 		    	shippingInfo.zipcode = form.zipcode.value
+	    	}else{
+	    		shippingInfo.address= "without"
+	    		shippingInfo.city = "without"
+		    	shippingInfo.state = "without"
 	    	}
 
 	    	if (user == 'AnonymousUser'){

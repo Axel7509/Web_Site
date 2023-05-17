@@ -1,25 +1,44 @@
-{% extends 'store/main.html' %}
+{% extends 'store/base.html' %}
 {% load static %}
+
 {% block content %}
 
-<div class="row">
-	{% for product in products %}
-		<div class="col-lg-4">
-			<img class="thumbnail" src="{{product.imageURL}}">
-			<div class="box-element product">
-				<h6><strong>{{product.name}}</strong></h6>
-				<hr>
+     <section id = "collection" class = "py-5">
+        <div class = "container">
 
-				<button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary
-				add-btn update-cart">Add to Cart</button>
+            <div class = "row g-0">
+                <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                    <button type = "button" class = "btn m-2 text-dark active-filter-btn" data-filter = "*">Categories</button>
+                    {% for category in categories %}
+                    <button type = "button" class = "btn m-2 text-dark" data-filter = ".{{ category.name }}">{{ category.name }} {{ category.items.count }}</button>
 
-				<h4 style="display: inline-block; float: right"><strong>${{product.price}}</strong></h4>
+                    {% endfor %}
+                </div>
 
-			</div>
-		</div>
-	{% endfor %}
+                <div class = "collection-list mt-4 row gx-0 gy-3">
+                    {% for product in products %}
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
+                        <div class = "collection-img position-relative">
+                            <img src = "{{product.imageURL}}" class = "w-100">
+                        </div>
+                        <div class = "text-center">
+                            {% if product.is_sold %}
+                            <h3><strong>Not available</strong></h3>
+                            {% else %}
+                            <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary
+                                    add-btn update-cart">Add to Cart</button>
+                            {% endif %}
+                            <h6><strong>{{product.name}}</strong></h6>
+                            <span class = "fw-bold"><strong>${{product.price}}</strong> </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end of collection -->
 
-</div>
 
 {% endblock content %}
 
