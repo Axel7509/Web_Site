@@ -36,6 +36,7 @@ LOGIN_REDIRECT_URL = '/'
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,8 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
 
-    'store.apps.StoreConfig'
-
+    'store.apps.StoreConfig',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +145,11 @@ JAZZMIN_SETTINGS = {
     "site_brand": "Admin Panel",
     "welcome_sign": "Welcome to the Admin Panel",
 }
+
+EMAIL_BACKEND = 'django.core.email.backends.smtp.EmailBackend'
+EMAIL_HOST_USER = 'sorok.arterg@gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_PASSWORD = ""

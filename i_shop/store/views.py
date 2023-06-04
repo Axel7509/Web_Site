@@ -3,7 +3,7 @@ import datetime
 from django.shortcuts import render, redirect
 from .models import *
 from django.http import JsonResponse
-
+import requests
 
 from .forms import SignupForm
 
@@ -39,6 +39,8 @@ def store(request):
     #products = Product.objects.filter(is_sold=False)
     products = Product.objects.all()
     categories = Category.objects.all()
+    
+    #print('products:', products)
     context = {'products': products,
                'cartItems': cartItems,
                'customer': customer,
@@ -57,7 +59,9 @@ def cart(request):
 
     else:
         # Create empty cart for now for non-logged in user
-        customer = Customer()
+        customer = Customer(
+            name=''
+        )
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
@@ -77,7 +81,9 @@ def checkout(request):
         cartItems = order.get_cart_items
     else:
         # Create empty cart for now for non-logged in user
-        customer = Customer()
+        customer = Customer(
+            name=''
+        )
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
@@ -167,11 +173,6 @@ def signup(request):
     return render(request, 'store/signup.html', context,)
 
 
-def leave_user(request):
-    request.user.is_authenticated = False
-    return store(request)
-
-
 def contact(request):
     if request.user.is_authenticated:
         customer = request.user.customer
@@ -180,13 +181,50 @@ def contact(request):
         cartItems = order.get_cart_items
     else:
         # Create empty cart for now for non-logged in user
-        customer = Customer()
+        customer = Customer(
+            name=''
+        )
         items = []
         order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = order['get_cart_items']
+    response = requests.get('https://official-joke-api.appspot.com/random_ten').json()
 
     context = {'items': items,
                'order': order,
                'cartItems': cartItems,
-               'customer': customer}
+               'customer': customer,
+               'response': response,
+               }
     return render(request, 'store/contact.html', context)
+
+
+def sort_store(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer(
+            name=''
+        )
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    categories = Category.objects.all()
+    data = json.loads(request.body)
+    cat_Id = data['filterId']
+    print('category:', cat_Id)
+    products = Product.objects.filter(category_id=cat_Id)
+    print('products:', products)
+
+    context = {'products': products,
+               'cartItems': cartItems,
+               'customer': customer,
+               'categories': categories}
+
+    #change to store/store.html after
+    return render(request, 'store/store.html', context)

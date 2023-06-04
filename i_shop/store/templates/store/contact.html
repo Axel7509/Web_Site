@@ -13,7 +13,21 @@
     <div class = "title text-center">
         <h1 class = "position-relative d-inline-block"></h1>
     </div>
-    <h1>1 developer died here</h1>
+    {% if request.user.is_authenticated %}
+
+        <h1>1 developer died here</h1>
+
+        <br>
+        {% for i in response %}
+            {{i.setup}}
+            {{i.punchline}}
+            <br>
+        {% endfor %}
+        <br>
+        <br>
+        <br>
+
+    {% endif %}
     <p style="color:#525050">Discover I_Shop, your go-to online destination for all your shopping desires.
         Browse through our carefully curated selection of top-notch products, ranging from fashionable apparel to state-of-the-art gadgets.
         With our intuitive interface and secure payment options, enjoy a seamless shopping experience from the comfort of your own home.

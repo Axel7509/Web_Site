@@ -8,9 +8,13 @@
 
             <div class = "row g-0">
                 <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
-                    <button type = "button" class = "btn m-2 text-dark active-filter-btn" data-filter = "*">Categories</button>
+                    <a  href="{% url 'store' %}">
+                        <button type = "button" class = "btn m-2 text-dark active-filter-btn">Categories</button>
+                    </a>
                     {% for category in categories %}
-                    <button type = "button" class = "btn m-2 text-dark" data-filter = ".{{ category.name }}">{{ category.name }} {{ category.items.count }}</button>
+                    <!--<a  href="{% url 'sort_store' %}">-->
+                        <button type = "button" class = "btn m-2 text-dark filter-update" data-filter = "{{ category.id }}">{{ category.name }} {{ category.items.count }}</button>
+                    <!--</a>-->
 
                     {% endfor %}
                 </div>
