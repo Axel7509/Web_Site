@@ -1,37 +1,23 @@
 {% extends 'store/base.html' %}
 {% load static %}
 {% block content %}
-    <div class = "title text-center">
-                <h1 class = "position-relative d-inline-block"></h1>
-    </div>
-    <div class = "title text-center">
-                <h1 class = "position-relative d-inline-block"></h1>
-    </div>
-    <div class = "title text-center">
-                <h1 class = "position-relative d-inline-block"></h1>
-    </div>
-    <div class = "title text-center">
-        <h1 class = "position-relative d-inline-block"></h1>
-    </div>
-    {% if request.user.is_authenticated %}
+    <div class = "container">
 
-        <h1>1 developer died here</h1>
+            <div class = "row g-0">
 
-        <br>
-        {% for i in response %}
-            {{i.setup}}
-            {{i.punchline}}
-            <br>
-        {% endfor %}
-        <br>
-        <br>
-        <br>
-
-    {% endif %}
-    <p style="color:#525050">Discover I_Shop, your go-to online destination for all your shopping desires.
-        Browse through our carefully curated selection of top-notch products, ranging from fashionable apparel to state-of-the-art gadgets.
-        With our intuitive interface and secure payment options, enjoy a seamless shopping experience from the comfort of your own home.
-        Unleash your inner shopaholic and indulge in the convenience of I_Shop</p>
+                <div class = "collection-list mt-4 row gx-0 gy-3">
+                    <div class = "col-md-6 col-lg-4 col-xl-3 p-2 best">
+                        <div class = "collection-img position-relative">
+                            <img src = "{% static 'images/man_icon.png' %}" class = "w-100">
+                        </div>
+                        <div class = "text-center">
+                            <h6><strong>Artem</strong></h6>
+                            <p>General manager</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
     <div class = "col-md-6 col-lg-3">
                     <h5 class = "fw-light mb-3">Contact Us</h5>
                     <div class = "d-flex justify-content-start align-items-start my-2 text-muted">

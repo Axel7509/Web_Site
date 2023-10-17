@@ -1,0 +1,32 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    .vacancy {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+        }
+
+        .vacancy h2, .vacancy p {
+            margin: 0;
+        }
+</style>
+
+<div class="vacancy">
+    <h2>Web developer</h2>
+    <p>Description: We are looking for a talented web developer to create a store website.</p>
+    <p>Salary: 2000 rubles per month</p>
+</div>
+
+
+<div class="vacancy">
+     <h2>Consultant</h2>
+     <p>Description: We are looking for an experienced consultant for our hotel.</p>
+     <p>Salary: From 1800 rubles per month</p>
+</div>
+
+{% endblock %}

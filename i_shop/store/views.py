@@ -5,7 +5,7 @@ from .models import *
 from django.http import JsonResponse
 import requests
 
-from .forms import SignupForm
+from .forms import *
 
 
 def store(request):
@@ -39,7 +39,7 @@ def store(request):
     #products = Product.objects.filter(is_sold=False)
     products = Product.objects.all()
     categories = Category.objects.all()
-    
+
     #print('products:', products)
     context = {'products': products,
                'cartItems': cartItems,
@@ -173,7 +173,7 @@ def signup(request):
     return render(request, 'store/signup.html', context,)
 
 
-def contact(request):
+def about_us(request):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
@@ -195,7 +195,7 @@ def contact(request):
                'customer': customer,
                'response': response,
                }
-    return render(request, 'store/contact.html', context)
+    return render(request, 'store/about_us.html', context)
 
 
 def sort_store(request):
@@ -228,3 +228,161 @@ def sort_store(request):
 
     #change to store/store.html after
     return render(request, 'store/store.html', context)
+
+
+def news(request):
+
+
+    news = News.objects.all()
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer(
+            name=''
+        )
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer,
+               'news': news,
+               }
+    return render(request, 'store/news.html', context)
+
+
+def terms(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer(
+            name=''
+        )
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer,
+               }
+    return render(request, 'store/terms.html', context)
+
+
+def contacts(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer(
+            name=''
+        )
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer,
+               }
+    return render(request, 'store/contacts.html', context)
+
+
+def vacancy(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer(
+            name=''
+        )
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer,
+               }
+    return render(request, 'store/vacancy.html', context)
+
+
+def reviews(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer(
+            name=''
+        )
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    reviews = Review.objects.all()
+    form = ReviewForm()
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            new_review = Review(
+                customer=request.user.customer,  # Get the username of the logged-in user
+                rate=form.cleaned_data['rating'],
+                comment=form.cleaned_data['text']
+            )
+            new_review.save()
+            return redirect('reviews')
+
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer,
+               'form': form,
+               'reviews': reviews,
+               }
+    return render(request, 'store/reviews.html', context)
+
+
+def coupons(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer(
+            name=''
+        )
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer,
+               }
+    return render(request, 'store/coupons.html', context)

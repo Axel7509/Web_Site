@@ -4,6 +4,7 @@
 {% block content %}
 
      <section id = "collection" class = "py-5">
+
         <div class = "container">
 
             <div class = "row g-0">
@@ -33,16 +34,46 @@
                                     add-btn update-cart">Add to Cart</button>
                             {% endif %}
                             <h6><strong>{{product.name}}</strong></h6>
-                            <span class = "fw-bold"><strong>${{product.price}}</strong> </span>
+                            <span class = "fw-bold"><strong>${{product.price|floatformat:2}}</strong> </span>
                         </div>
                     </div>
                     {% endfor %}
                 </div>
+
             </div>
+
         </div>
+
+
+
+          <div class = "container">
+
+            <div class = "row g-0">
+                <div class = "d-flex flex-wrap justify-content-center mt-5 filter-button-group">
+                    <a  href="https://www.apple.com/">
+                        <img src = "{% static 'images/apple_logo.png' %}">
+                    </a>
+
+                    <a  href="https://https://www.samsung.com/ru/">
+                        <img src = "{% static 'images/samsung_logo.png' %}">
+                    </a>
+
+                    <a  href="https://www.sony.ru/">
+                        <img src = "{% static 'images/sony_logo.png' %}">
+                    </a>
+                </div>
+            </div>
+
+              <div class = "collection-img position-relative">
+                <img src = "{% static 'images/partners.png' %}">
+              </div>
+          </div>
     </section>
     <!-- end of collection -->
+    <script type="text/javascript">
+		//location.reload()
 
+	</script>
 
 {% endblock content %}
 

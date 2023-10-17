@@ -1,0 +1,71 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+
+</style>
+
+<table>
+    <thead>
+    <tr>
+        <th>Сокращение</th>
+        <th>Полное значение</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><abbr title = "Air Conditioning (кондиционер)">AC</abbr></td>
+        <td>Air Conditioning (кондиционер)</td>
+    </tr>
+    <tr>
+        <td><abbr title = "Television (телевизор)">TV</abbr></td>
+        <td>Television (телевизор)</td>
+    </tr>
+    <tr>
+        <td><abbr title = "Wireless Fidelity (беспроводной интернет)">WIFI</abbr></td>
+        <td>Wireless Fidelity (беспроводной интернет)</td>
+    </tr>
+    <tr>
+        <td><abbr title = "Chief Executive Officer (генеральный директор)">CEO</abbr></td>
+        <td>Chief Executive Officer (генеральный директор)</td>
+    </tr>
+    <tr>
+        <td><abbr title = "Human Resources (отдел кадров)">HR</abbr></td>
+        <td>Human Resources (отдел кадров)</td>
+    </tr>
+    <tr>
+        <td><abbr title = "Date of Arrival (дата прибытия)">DOA</abbr></td>
+        <td>Date of Arrival (дата прибытия)</td>
+    </tr>
+    <tr>
+        <td><abbr title = "Date of Departure (дата отъезда)">DOD</abbr></td>
+        <td>Date of Departure (дата отъезда)</td>
+    </tr>
+    <tr>
+        <td><abbr title = "Frequently Asked Questions (часто задаваемые вопросы)">FAQ</abbr></td>
+        <td>Frequently Asked Questions (часто задаваемые вопросы)</td>
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}

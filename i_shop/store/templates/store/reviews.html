@@ -1,0 +1,35 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+
+ <br>
+
+    <section>
+        <h2>Reviews</h2>
+        <ul>
+            {% for review in reviews %}
+                <h1>--------</h1>
+                <li>
+                    <h3>{{ review.customer }}</h3>
+
+                    <p>{{ review.comment }}</p>
+                    <p>Rating: {{ review.rate }} ⭐</p>
+                </li>
+                <h1>--------</h1>
+            {% empty %}
+                <p>No reviews available.</p>
+            {% endfor %}
+        </ul>
+    </section>
+
+    {% if user.is_authenticated %}
+            <section>
+                <h2>Leave a Review</h2>
+                <form method="post" action="{% url 'reviews' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Submit Review</button>
+                </form>
+            </section>
+    {% endif %}
+{% endblock %}

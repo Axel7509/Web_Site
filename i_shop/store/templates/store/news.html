@@ -1,0 +1,43 @@
+{% extends 'store/base.html' %}
+{% load static %}
+{% block content %}
+    <script>
+        function toggleNews(newsId) {
+            var shortNews = document.getElementById(newsId + '-short');
+            var fullNews = document.getElementById(newsId + '-full');
+            if (shortNews.style.display === "none") {
+                shortNews.style.display = "block";
+                fullNews.style.display = "none";
+            } else {
+                shortNews.style.display = "none";
+                fullNews.style.display = "block";
+            }
+        }
+    </script>
+    <h1>Last news</h1>
+
+<div class="news-container">
+
+    {% for new in news %}
+        <div class="news-item">
+        <h2 class="news-title">{{new.name}}</h2>
+            <div class = "collection-img position-relative">
+                <img src = "{{new.imageURL}}">
+            </div>
+        <div id="news1-short">
+            <p class="news-content">{{new.reference}}</p>
+            <button class="read-more-button" onclick="toggleNews('news1')">Read more</button>
+        </div>
+        <div id="news1-full" class="full-news" style="display: none;">
+            <p class="news-content">
+                {{new.content}}
+            </p>
+            <button class="read-more-button" onclick="toggleNews('news1')">Collapse</button>
+        </div>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+{% endblock %}

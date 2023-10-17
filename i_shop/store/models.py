@@ -104,3 +104,30 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+
+
+class News(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(null=True, blank=True)
+    content = models.CharField(max_length=255)
+    reference = models.CharField(max_length=255,  null=True, blank=True)
+
+    @property
+    def imageURL(self):
+        try:
+            url = self.image.url
+        except:
+            url = ''
+        return url
+
+    def __str__(self):
+        return str(self.name)
+
+
+class Review(models.Model):
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, blank=True, null=True)
+    comment = models.CharField(max_length=255)
+    rate = models.IntegerField(default=0, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.id)
