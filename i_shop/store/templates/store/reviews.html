@@ -1,21 +1,51 @@
 {% extends 'store/base.html' %}
 {% load static %}
 {% block content %}
+<style>
+    h2 {
+            text-align: center;
+            margin-top: 30px;
+        }
 
+    .rating-container {
+      max-width: 400px;
+      margin: 20px auto;
+    }
+
+    .rating-container .rating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .rating-container .rating .stars {
+      color: #FFD700;
+      font-size: 24px;
+      margin-right: 5px;
+    }
+
+    .rating-container .rating .sender {
+      font-weight: bold;
+      margin-right: 5px;
+    }
+
+    .rating-container .rating .comment {
+      font-style: italic;
+    }
+ </style>   
  <br>
-
+    
     <section>
         <h2>Reviews</h2>
         <ul>
             {% for review in reviews %}
-                <h1>--------</h1>
-                <li>
-                    <h3>{{ review.customer }}</h3>
-
-                    <p>{{ review.comment }}</p>
-                    <p>Rating: {{ review.rate }} ⭐</p>
-                </li>
-                <h1>--------</h1>
+                <div class="rating-container">
+                    <div class="rating">
+                        <span class="stars">Rating: {{ review.rate }} ⭐</span>
+                        <span class="sender">{{ review.customer }}</span>
+                        <span class="comment">{{ review.comment }}</span>
+                    </div>
+                </div>
             {% empty %}
                 <p>No reviews available.</p>
             {% endfor %}

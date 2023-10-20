@@ -1,6 +1,127 @@
 {% extends 'store/base.html' %}
 {% load static %}
 {% block content %}
+
+    <style>
+       .logo-container {
+            width: 600px;
+            height: 200px;
+            position: relative;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .logo:hover {
+            transform: scale(1.2);
+        } 
+
+        .certificate {
+            width: 800px;
+            height: 600px;
+            background-image: url(images/logo.jpg);
+            background-size: cover;
+            position: relative;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #ffffff;
+            padding: 40px;
+            box-sizing: border-box;
+            border: 20px solid transparent;
+            border-image: url(images/logo.jpg) 40 round;
+            z-index: 1;
+        }
+
+        .certificate:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
+            z-index: -1;
+        }
+
+        .certificate-title {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .certificate-subtitle {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .recipient-name {
+            font-size: 48px;
+            margin: 40px 0;
+        }
+
+        .issued-date {
+            font-size: 18px;
+        }
+        .timeline {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline li {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .year {
+            font-weight: bold;
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .event {
+            background-color: #f7f7f7;
+            padding: 10px;
+        }
+
+        .event h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .event p {
+            margin: 0;
+        }
+
+        .credentials {
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 30px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%; 
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
     <div class = "title text-center">
                 <h1 class = "position-relative d-inline-block"></h1>
     </div>
@@ -28,6 +149,15 @@
         <br>
 
     {% endif %}
+    <div class="logo-container">
+        <img class="logo" src="{% static 'images/logo.jpg' %}" alt="Logo">
+    </div>
+    <div class="certificate">
+        <h2 class="certificate-title">Сертификат</h2>
+        <p class="certificate-subtitle">Награждается</p>
+        <h3 class="recipient-name">Имя получателя</h3>
+        <p class="issued-date">Дата выдачи: 20 октября 2023</p>
+      </div>
     <p style="color:#525050">Discover I_Shop, your go-to online destination for all your shopping desires.
         Browse through our carefully curated selection of top-notch products, ranging from fashionable apparel to state-of-the-art gadgets.
         With our intuitive interface and secure payment options, enjoy a seamless shopping experience from the comfort of your own home.
@@ -38,10 +168,46 @@
      height="500">
     </div>
 
-    <div class = "col-md-6 col-lg-3">
+    <section>
+        <h2>Video</h2>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/nNHGiNfnmgg" frameborder="0" allowfullscreen width="800"
+                    height="450"></iframe>
+          </div>
+    </section>
+    <br>
+    <ul class="timeline">
+        <li>
+          <div class="year">2021</div>
+          <div class="event">
+            <h3>Store Opening</h3>
+            <p>I_shop opened its doors to customers, offering a wide range of technology,
+                 including laptops, smartphones, TVs and gaming consoles.</p>
+          </div>
+        </li>
+        <li>
+          <div class="year">2022</div>
+          <div class="event">
+            <h3>Technology Exhibition Organisation</h3>
+            <p>I_shop hosted a major technology exhibition that showcased leading manufacturers
+                 and showcased the latest innovative products and technologies.</p>
+          </div>
+        </li>
+        <li>
+          <div class="year">2023</div>
+          <div class="event">
+            <h3>Opening a branch in another city</h3>
+            <p>In response to growing demand, I_shop opened a new branch in another 
+                city to offer its products and services to customers more widely.</p>
+          </div>
+        </li>
+      </ul>
+      
+      
+    <div class = "col-md-6 col-lg-3 credentials">
                     <br>
                     <br>
-                    <h5 class = "fw-light mb-3">Contact Us</h5>
+                    <h2 class = "fw-light mb-3">Contact Us</h5>
                     <div class = "d-flex justify-content-start align-items-start my-2 text-muted">
                         <span class = "me-3">
                             <i class="fa-solid fa-location-dot" style="color: #000000;"></i>

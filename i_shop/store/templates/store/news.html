@@ -1,6 +1,188 @@
 {% extends 'store/base.html' %}
 {% load static %}
 {% block content %}
+
+
+    <style>
+        @font-face {
+            font-family: 'MainFont';
+            src: url('https://example.com/fonts/mainfont.woff2') format('woff2'),
+                url('https://example.com/fonts/mainfont.woff') format('woff');
+        }
+
+        @font-face {
+            font-family: 'AlternativeFont';
+            src: url('https://example.com/fonts/alternativefont.woff2') format('woff2'),
+                url('https://example.com/fonts/alternativefont.woff') format('woff');
+        }
+
+        body {
+            font-family: 'MainFont', 'AlternativeFont', sans-serif;
+        }
+
+        h2[href$="/news/"] {
+          color: red;
+            text-transform: uppercase;
+            /*text-transform: capitalize;*/
+        }
+    
+        img[src ^= "/images/"] {
+          border: 1px solid red;
+        }
+        
+    
+        p[class="news-content"] {
+          background-color: #6a6a6a;
+        }
+        
+        h2.title {
+          color: rgb(144, 41, 41);
+        }
+        
+    
+        div p {
+          font-family: Arial, sans-serif; 
+          font-size: 16px; 
+          font-weight: bold; 
+          text-indent: 20px;
+          line-height: 1.5; 
+
+          position: relative; /* Относительное позиционирование */
+          top: 50%; 
+          left: 50%;
+          transform: translate(-50%, -50%); /* Центрирование блока */
+            
+          text-align: center; 
+
+          word-spacing: 2px;
+          letter-spacing: 1px;
+
+          word-break: break-word;
+          hyphens: auto; /* Перенос слов */
+        }
+        
+        /* Селектор дочерних элементов */
+        section ul > li {
+          list-style-type: square;
+        }
+    
+        section ul > li:first-child {
+            font-weight: bold;
+        }
+    
+        section ul > li:last-child {
+            color: red;
+        }
+    
+        /* Каждый третий элемент списка (начиная с первого элемента) */
+        section ul > li:nth-child(3n+1) {
+            background-color: yellow;
+        }
+    
+        .main-link {
+            color: blueviolet;
+            text-decoration: none;
+        }
+    
+        .main-link:hover{
+            color: red;
+            text-decoration: underline;
+            text-decoration-color: red;
+            cursor: not-allowed;
+        }
+
+        .button-cursor:hover{
+            cursor: grab;
+        }
+    
+        .main-link:active{
+            color: blueviolet;
+            text-decoration-color: blueviolet;
+        }
+    
+        /* Элементы в фокусе */
+        input:focus {
+            outline: 2px solid green;
+        }
+    
+        select:focus {
+            background-color: ivory;
+        }
+    
+        .main-link:visited{
+            color: red;
+        }
+    
+        input:enabled {
+        background-color: white;
+        }
+
+        input:required {
+        border: 1px solid red;
+        }
+
+        input:disabled {
+        opacity: 0.5;
+        }
+
+        input:out-of-range {
+        color: red;
+        }
+
+        /* Включенные флажки */
+        input[type="checkbox"]:checked {
+        background-color: green;
+        }
+
+        /* Включенные переключатели */
+        input[type="radio"]:checked {
+        border-color: blue;
+        }
+
+        p[lang="en"]:before,
+        p[lang="en"]:after {
+        content: '"';
+        color: red;
+        }
+
+        p[lang="fr"]:before,
+        p[lang="fr"]:after {
+        content: '«';
+        color: blue;
+        }
+
+  
+        p[lang="ru"]:before,
+        p[lang="ru"]:after {
+        content: '«';
+        color: green;
+        }
+
+        p:before {
+        content: '“';
+        }
+
+        p:after {
+        content: '”';
+        }
+
+        .first-letter::first-letter {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .unicode-list li::before {
+            content: '\2022'; /* Код символа Юникода для маркера точки • */
+            margin-right: 0.5em;
+        }
+
+        ::selection {
+            background-color: yellow;
+            color: blue;
+        }
+
+    </style>
+
     <script>
         function toggleNews(newsId) {
             var shortNews = document.getElementById(newsId + '-short');
@@ -14,30 +196,100 @@
             }
         }
     </script>
-    <h1>Last news</h1>
 
-<div class="news-container">
+<h2 href = "{% url 'news' %}">Last news</h1>
+
+<div class="container">
 
     {% for new in news %}
-        <div class="news-item">
-        <h2 class="news-title">{{new.name}}</h2>
-            <div class = "collection-img position-relative">
-                <img src = "{{new.imageURL}}">
+        <h2 class="title first-letter">{{new.name}}</h2>
+            <div>
+                <img src = "{{new.imageURL}}" width="500"
+                height="350">
             </div>
         <div id="news1-short">
             <p class="news-content">{{new.reference}}</p>
-            <button class="read-more-button" onclick="toggleNews('news1')">Read more</button>
+            <button class="read-more-button btn btn-outline-secondary
+            add-btn update-cart" onclick="toggleNews('news1')">Read more</button>
         </div>
         <div id="news1-full" class="full-news" style="display: none;">
             <p class="news-content">
                 {{new.content}}
             </p>
-            <button class="read-more-button" onclick="toggleNews('news1')">Collapse</button>
+            <button class="read-more-button btn btn-outline-secondary
+            add-btn update-cart" onclick="toggleNews('news1')">Collapse</button>
         </div>
     </div>
     {% endfor %}
 
 
 </div>
+<br>
+<div>
+    <p>This paragraph has a font size of 16px.</p>
+    <br>
+    <p>Discover I_Shop, your go-to online destination for all your shopping desires.
+        Browse through our carefully curated selection of top-notch products, ranging from fashionable apparel to state-of-the-art gadgets.
+        With our intuitive interface and secure payment options, enjoy a seamless shopping experience from the comfort of your own home.
+        Unleash your inner shopaholic and indulge in the convenience of I_Shop</p>
+</div>
+ <section>
+    <ul class="main-link">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+    </ul>
+ </section> 
+
+ <a href="#" class="main-link"> read </a>
+
+<form>
+    <p>Which flavor would you like to order?</p>
+    <label>Full Name: <input name="firstName" type="text" /></label>
+    <label
+      >Flavor:
+      <select name="flavor">
+        <option>Cherry</option>
+        <option>Green Tea</option>
+        <option>Moose Tracks</option>
+        <option>Mint Chip</option>
+      </select>
+    </label>
+</form>
+<br>
+<form>
+    <label for="input1">Accessible Input:</label>
+    <input type="text">
+    <br>
+    <label for="input2">Required Input:</label>
+    <input type="text" required>
+    <br>
+    <label for="input3">Disabled Input:</label>
+    <input type="text" disabled>
+    <br>
+    <label for="input4">Input Out of Range:</label>
+    <input type="number"min="0" max="10" value="15">
+    <br>
+    <label for="checkbox1">
+      <input type="checkbox">
+      Checked Checkbox
+    </label>
+    <br>
+    <label for="radio1">
+      <input type="radio">
+      Checked Radio Button
+    </label>
+</form>
+
+<p class="first-letter" lang="en">This is an English quote.</p>
+<p lang="fr">C'est une citation en français.</p>
+<p lang="ru">Это русская цитата.</p>
+
+<ul class="unicode-list">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+</ul>
 
 {% endblock %}
