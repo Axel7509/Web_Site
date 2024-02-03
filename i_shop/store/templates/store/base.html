@@ -89,6 +89,7 @@
                               <a class = "nav-link text-uppercase text-dark" href = "{% url 'vacancy' %}">vacancy</a>
                               <a class = "nav-link text-uppercase text-dark" href = "{% url 'reviews' %}">reviews</a>
                               <a class = "nav-link text-uppercase text-dark" href = "{% url 'coupons' %}">promo codes and coupons</a>
+                              <a class = "nav-link text-uppercase text-dark" href = "{% url 'tests' %}">tests</a>
                           </div>
                         </div>
                     </li>
@@ -148,6 +149,8 @@
                 <div class = "col-md-6 col-lg-3">
                     <a class = "text-uppercase text-decoration-none brand text-white" href = "/">I_shop</a>
                     <p style="color:#525050">Discover I_Shop(Internet_shop)</p>
+                    <p style="color:#525050" id="countdown">Left: 1:00:00</p>
+
                 </div>
 
                 <div class = "col-md-6 col-lg-3">
@@ -204,5 +207,6 @@
 
 	<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/filter.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/time.js' %}"></script>
 </body>
 </html>

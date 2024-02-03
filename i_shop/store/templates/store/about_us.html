@@ -24,88 +24,6 @@
             transform: scale(1.2);
         } 
 
-        .certificate {
-            width: 800px;
-            height: 600px;
-            background-image: url(images/logo.jpg);
-            background-size: cover;
-            position: relative;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            color: #ffffff;
-            padding: 40px;
-            box-sizing: border-box;
-            border: 20px solid transparent;
-            border-image: url(images/logo.jpg) 40 round;
-            z-index: 1;
-        }
-
-        .certificate:before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
-            z-index: -1;
-        }
-
-        .certificate-title {
-            font-size: 36px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .certificate-subtitle {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .recipient-name {
-            font-size: 48px;
-            margin: 40px 0;
-        }
-
-        .issued-date {
-            font-size: 18px;
-        }
-        .timeline {
-            list-style: none;
-            padding: 0;
-        }
-
-        .timeline li {
-            display: flex;
-            margin-bottom: 20px;
-        }
-
-        .year {
-            font-weight: bold;
-            font-size: 24px;
-            margin-right: 10px;
-        }
-
-        .event {
-            background-color: #f7f7f7;
-            padding: 10px;
-        }
-
-        .event h3 {
-            margin: 0;
-            font-size: 20px;
-        }
-
-        .event p {
-            margin: 0;
-        }
-
-        .credentials {
-            font-weight: bold;
-            font-size: 18px;
-            margin-top: 30px;
-        }
-
         .video-container {
             position: relative;
             width: 100%;
@@ -120,49 +38,102 @@
             width: 100%;
             height: 100%;
         }
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Montserrat', serif;
+            }
+            
+            #text{
+                position: relative;
+                color:white;
+                font-size: 10rem;
+            }
+            #sec{
+                padding:100px;
+            padding-bottom:20px;
+            }
+            #sec h2{
+                font-size: 4rem;
+                margin-bottom: 30px;
+                color:#20496a;
+            }
+            #sec p{
+                font-size: 1.2rem;
+            line-height:2rem;
+            font-weight:300;
+                color:#20496a;
+            }
+            table {
+                border-collapse: collapse;
+                width: 70px;
+                margin-top: 20px;
+                margin-left: 20px;
+            }
+
+            td {
+                border: 1px solid black;
+                padding: 2px;
+                text-align: center;
+            }
+
+            td.highlighted-even {
+                background-color: lightblue;
+            }
+
+            td.highlighted-odd {
+                background-color: lightcoral;
+            }
+            #container {
+      position: relative;
+      width: 100%;
+      height: 800px; /* Высота контейнера, подстроить под ваши нужды */
+      overflow: hidden;
+    }
+
+    #store {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #runner {
+      position: absolute;
+      bottom: 0;
+      left: -200px;
+      transition: left 1s linear;
+    }
     </style>
 
-    <div class = "title text-center">
-                <h1 class = "position-relative d-inline-block"></h1>
+    <br>
+    <br>
+    <br>
+    
+      <section id="sec">
+        <h2>Welcome to the I_shop</h2>
+        <p style="color:#525050">Discover I_Shop, your go-to online destination for all your shopping desires.
+            Browse through our carefully curated selection of top-notch products, ranging from fashionable apparel to state-of-the-art gadgets.
+            With our intuitive interface and secure payment options, enjoy a seamless shopping experience from the comfort of your own home.
+            Unleash your inner shopaholic and indulge in the convenience of I_Shop
+        </p>
+      </section>
+      
+    <div id="container">
+      <div id="store">
+        <img src="{% static 'images/store.png' %}" alt="Store">
+      </div>
+    
+      <div id="runner">
+        <img src="{% static 'images/runner.png' %}" alt="Runner">
+      </div>
     </div>
-    <div class = "title text-center">
-                <h1 class = "position-relative d-inline-block"></h1>
-    </div>
-    <div class = "title text-center">
-                <h1 class = "position-relative d-inline-block"></h1>
-    </div>
-    <div class = "title text-center">
-        <h1 class = "position-relative d-inline-block"></h1>
-    </div>
-    {% if request.user.is_authenticated %}
 
-        <h1>1 developer died here</h1>
-
-        <br>
-        {% for i in response %}
-            {{i.setup}}
-            {{i.punchline}}
-            <br>
-        {% endfor %}
-        <br>
-        <br>
-        <br>
-
-    {% endif %}
     <div class="logo-container">
         <img class="logo" src="{% static 'images/logo.jpg' %}" alt="Logo">
     </div>
-    <div class="certificate">
-        <h2 class="certificate-title">Сертификат</h2>
-        <p class="certificate-subtitle">Награждается</p>
-        <h3 class="recipient-name">Имя получателя</h3>
-        <p class="issued-date">Дата выдачи: 20 октября 2023</p>
-      </div>
-    <p style="color:#525050">Discover I_Shop, your go-to online destination for all your shopping desires.
-        Browse through our carefully curated selection of top-notch products, ranging from fashionable apparel to state-of-the-art gadgets.
-        With our intuitive interface and secure payment options, enjoy a seamless shopping experience from the comfort of your own home.
-        Unleash your inner shopaholic and indulge in the convenience of I_Shop</p>
-
     <div class = "collection-img position-relative">
         <img src = "{% static 'images/cert.jpg' %}" width="400"
      height="500">
@@ -202,6 +173,18 @@
           </div>
         </li>
       </ul>
+
+      <label for="tableSize">Enter table size:</label>
+      <input type="number" id="tableSize" min="1" value="3">
+      <button id="generateButton">Generate Table</button>
+      <button id="transposeButton" style="display: none;">Transpose Table</button>
+      <label for="maxSelectedCells">Enter amount of cells selected:</label>
+      <input type="number" id="maxSelectedCells" min="1" value="1">
+      <button id="addRowButton">Add Row</button>
+      <button id="addColumnButton">Add Column</button>
+      <div id="matrixTable">
+          <table id="randomTable"></table>
+      </div>
       
       
     <div class = "col-md-6 col-lg-3 credentials">
@@ -231,4 +214,8 @@
                         <span style="color:#525050">+375 29 545 63 04</span>
                     </div>
                 </div>
+    
+<script src="{% static 'js/matrix.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/scroll.js' %}"></script>
+
 {% endblock %}

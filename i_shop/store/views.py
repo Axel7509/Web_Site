@@ -386,3 +386,26 @@ def coupons(request):
                'customer': customer,
                }
     return render(request, 'store/coupons.html', context)
+
+
+def tests(request):
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer=customer, complete=False)
+        items = order.orderitem_set.all()
+        cartItems = order.get_cart_items
+    else:
+        # Create empty cart for now for non-logged in user
+        customer = Customer(
+            name=''
+        )
+        items = []
+        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = order['get_cart_items']
+
+    context = {'items': items,
+               'order': order,
+               'cartItems': cartItems,
+               'customer': customer,
+               }
+    return render(request, 'store/tests.html', context)

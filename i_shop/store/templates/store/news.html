@@ -53,6 +53,7 @@
           transform: translate(-50%, -50%); /* Центрирование блока */
             
           text-align: center; 
+          font-kerning: normal;
 
           word-spacing: 2px;
           letter-spacing: 1px;
@@ -181,6 +182,30 @@
             color: blue;
         }
 
+        .article-summary {
+            width: 300px; 
+            height: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .article-summary::after {
+            content: "...";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: #fff;
+            padding: 0 5px;
+        }
+
+        .article-summary.expand {
+            height: auto;
+        }
+
+        .article-summary.expand::after {
+            content: "";
+        }
+
     </style>
 
     <script>
@@ -219,6 +244,7 @@
             <button class="read-more-button btn btn-outline-secondary
             add-btn update-cart" onclick="toggleNews('news1')">Collapse</button>
         </div>
+
     </div>
     {% endfor %}
 

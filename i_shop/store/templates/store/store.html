@@ -6,7 +6,7 @@
     <style>
         .catalog-container {
             display: grid;
-            grid-template-columns: repeat(1, 1fr); /* Задает 3 колонки равной ширины */
+            grid-template-columns: repeat(1, 1fr); /* Задает колонки равной ширины */
             grid-gap: 20px; /* Задает промежуток между элементами */
         }
 
@@ -60,6 +60,32 @@
             100% {
                 transform:scale(1.5);
             }
+        }
+
+        .carousel {
+        width: 300px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        }
+
+        .banner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 10px; /* Задаем радиус скругления углов */
+        overflow: hidden; /* Обрезаем содержимое, чтобы оно соответствовало скругленным углам */
+        }
+
+        .banner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        }
+        .banner {
+            display: none;
         }
     </style>
 
@@ -124,16 +150,33 @@
                     </a>
                 </div>
               </div>
-
-              <div class="banner">
-                <img src="{% static 'images/partners.png' %}" class="animated-image" alt="Animated Image">
-              </div>
     </section>
     <!-- end of collection -->
-    <script type="text/javascript">
-		//location.reload()
 
-	</script>
+    <div class="carousel">
+        <a class="banner" href="https://www.apple.com/" target="_blank">
+          <img src="{% static 'images/apple_logo.png' %}" alt="Banner 1">
+        </a>
+        <a class="banner" href="https://https://www.samsung.com" target="_blank">
+          <img src="{% static 'images/samsung_logo.png' %}" alt="Banner 2">
+        </a>
+        <a class="banner" href="https://www.sony.ru/" target="_blank">
+          <img src="{% static 'images/sony_logo.png' %}" alt="Banner 3">
+        </a>
+    </div>
+    {% if request.user.is_superuser %}
+
+    <form>
+        <label for="interval">Интервал (в секундах):</label>
+        <input type="number" id="interval" value="2">
+        <input type="button" value="Установить интервал" onclick="setIntervalValue()">
+    </form>
+
+    {% endif %}
+   
+
+    <script type="text/javascript" src="{% static 'js/banners.js' %}"></script>
+
 
 {% endblock content %}
 
